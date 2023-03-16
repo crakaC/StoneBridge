@@ -1,0 +1,27 @@
+import org.example.stonebridge.data.UserType;
+
+CREATE TABLE user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
+    email TEXT NOT NULL,
+    type TEXT AS UserType NOT NULL
+);
+
+CREATE INDEX user_email ON user(email);
+
+getAll:
+SELECT * FROM user;
+
+count:
+SELECT COUNT(*) FROM user;
+
+findById:
+SELECT * FROM user
+WHERE id = ? LIMIT 1;
+
+findByEmail:
+SELECT * FROM user
+WHERE email = ?;
+
+insert:
+INSERT INTO user (email, type)
+VALUES (?, ?);
