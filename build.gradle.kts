@@ -17,7 +17,16 @@ dependencies {
     kapt("com.google.dagger:dagger-compiler:2.45")
     implementation("app.cash.sqldelight:sqlite-driver:2.0.0-alpha05")
     implementation("app.cash.sqldelight:coroutines-extensions:2.0.0-alpha05")
+    testImplementation("io.kotest:kotest-assertions:4.0.7")
     testImplementation(kotlin("test"))
+
+    testImplementation(platform("org.junit:junit-bom:5.9.2"))
+    testImplementation ("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher") {
+        because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions")
+    }
 }
 
 tasks.test {
