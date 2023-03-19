@@ -1,0 +1,13 @@
+CREATE TABLE company (
+    domain TEXT NOT NULL,
+    numberOfEmployees INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE INDEX company_domain ON company(domain);
+
+getOne:
+SELECT * FROM company;
+
+insertOrReplace:
+INSERT OR REPLACE INTO company
+VALUES ?;
