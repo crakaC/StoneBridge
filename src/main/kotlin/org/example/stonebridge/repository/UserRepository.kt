@@ -1,10 +1,12 @@
 package org.example.stonebridge.repository
 
 import kotlinx.coroutines.withContext
-import org.example.stonebridge.Database
-import org.example.stonebridge.User
 import org.example.stonebridge.UserQueries
+import org.example.stonebridge.data.User
+import org.example.stonebridge.db.Database
 import org.example.stonebridge.di.IODispatcher
+import org.example.stonebridge.mapper.toRecord
+import org.example.stonebridge.mapper.toUser
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
@@ -16,19 +18,19 @@ class UserRepository @Inject constructor(
 ) {
     suspend fun findByUserId(id: Long): User? {
         return userQuery {
-            findById(id).executeAsOneOrNull()
+            findById(id).executeAsOneOrNull()?.toUser()
         }
     }
 
     suspend fun save(user: User) {
         userQuery {
-            insertOrReplace(user)
+            insertOrReplace(user.toRecord())
         }
     }
 
     suspend fun getAll(): List<User> {
         return userQuery {
-            selectAll().executeAsList()
+            selectAll().executeAsList().map { it.toUser() }
         }
     }
 

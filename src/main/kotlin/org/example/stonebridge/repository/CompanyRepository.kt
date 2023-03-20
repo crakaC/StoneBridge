@@ -1,10 +1,12 @@
 package org.example.stonebridge.repository
 
 import kotlinx.coroutines.withContext
-import org.example.stonebridge.Company
 import org.example.stonebridge.CompanyQueries
-import org.example.stonebridge.Database
+import org.example.stonebridge.data.Company
+import org.example.stonebridge.db.Database
 import org.example.stonebridge.di.IODispatcher
+import org.example.stonebridge.mapper.toCompany
+import org.example.stonebridge.mapper.toRecord
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
@@ -16,13 +18,13 @@ class CompanyRepository @Inject constructor(
 ) {
     suspend fun get(): Company? {
         return companyQuery {
-            getOne().executeAsOneOrNull()
+            getOne().executeAsOneOrNull()?.toCompany()
         }
     }
 
     suspend fun save(company: Company) {
         companyQuery {
-            insertOrReplace(company)
+            insertOrReplace(company.toRecord())
         }
     }
 

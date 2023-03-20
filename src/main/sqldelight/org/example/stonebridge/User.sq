@@ -1,24 +1,24 @@
 import org.example.stonebridge.data.UserType;
 
-CREATE TABLE user (
-    id INTEGER PRIMARY KEY,
+CREATE TABLE userRecord (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT NOT NULL,
     type TEXT AS UserType NOT NULL
 );
 
-CREATE INDEX user_email ON user(email);
+CREATE INDEX user_email ON userRecord(email);
 
 selectAll:
-SELECT * FROM user;
+SELECT * FROM userRecord;
 
 findById:
-SELECT * FROM user
+SELECT * FROM userRecord
 WHERE id = ? LIMIT 1;
 
 findByEmail:
-SELECT * FROM user
+SELECT * FROM userRecord
 WHERE email = ?;
 
 insertOrReplace:
-INSERT OR REPLACE INTO user
+INSERT OR REPLACE INTO userRecord
 VALUES ?;

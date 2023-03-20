@@ -1,13 +1,11 @@
-package org.example.stonebridge.repository
+package org.example.stonebridge
 
 import io.kotest.matchers.shouldBe
-import org.example.stonebridge.Company
-import org.example.stonebridge.data.isEmailCorporate
+import org.example.stonebridge.data.Company
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
 
 class CompanyTest {
 
@@ -19,7 +17,7 @@ class CompanyTest {
     fun `従業員のメールアドレスと非従業員のメールアドレスを区別する with CsvSource`(
         domain: String, email: String, expected: Boolean
     ) {
-        val sut = Company(domain = domain, numberOfEmployees = 0)
+        val sut = Company(id = 1, domain = domain, numberOfEmployees = 0)
         val ret = sut.isEmailCorporate(email)
         ret shouldBe expected
     }
@@ -37,8 +35,8 @@ class CompanyTest {
         @JvmStatic
         fun companyNewEmailProvider(): List<Arguments> {
             return listOf(
-                Arguments.of(Company("mycorp.com", 0), "email@mycorp.com", true),
-                Arguments.of(Company("mycorp.com", 0), "email@gmail.com", false)
+                Arguments.of(Company(id = 1, domain = "mycorp.com", numberOfEmployees = 0), "email@mycorp.com", true),
+                Arguments.of(Company(id = 1, domain = "mycorp.com", numberOfEmployees = 0), "email@gmail.com", false)
             )
         }
     }

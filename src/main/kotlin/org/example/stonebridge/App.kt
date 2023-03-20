@@ -1,5 +1,7 @@
 package org.example.stonebridge
 
+import org.example.stonebridge.data.Company
+import org.example.stonebridge.data.User
 import org.example.stonebridge.data.UserType
 import org.example.stonebridge.di.DaggerAppComponent
 
@@ -17,6 +19,6 @@ suspend fun main() {
             )
         )
     }
-    companyRepository.save(Company(domain = "example.org", numberOfEmployees = 10))
+    companyRepository.save(Company(id = 1, domain = "example.org", numberOfEmployees = 10))
     userController.changeEmail(1, "new@example.org")
 }

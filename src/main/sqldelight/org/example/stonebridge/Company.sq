@@ -1,13 +1,14 @@
-CREATE TABLE company (
+CREATE TABLE companyRecord (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     domain TEXT NOT NULL,
     numberOfEmployees INTEGER NOT NULL DEFAULT 0
 );
 
-CREATE INDEX company_domain ON company(domain);
+CREATE INDEX company_domain ON companyRecord(domain);
 
 getOne:
-SELECT * FROM company;
+SELECT * FROM companyRecord;
 
 insertOrReplace:
-INSERT OR REPLACE INTO company
+INSERT OR REPLACE INTO companyRecord
 VALUES ?;

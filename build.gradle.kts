@@ -44,7 +44,7 @@ application {
 sqldelight {
     databases {
         create("Database") {
-            packageName.set("org.example.stonebridge")
+            packageName.set("org.example.stonebridge.db")
         }
     }
 }
