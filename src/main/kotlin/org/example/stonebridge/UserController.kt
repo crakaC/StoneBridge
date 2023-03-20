@@ -1,6 +1,5 @@
 package org.example.stonebridge
 
-import org.example.stonebridge.data.changeEmail
 import org.example.stonebridge.external.IMessageBus
 import org.example.stonebridge.repository.CompanyRepository
 import org.example.stonebridge.repository.UserRepository

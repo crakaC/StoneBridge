@@ -1,16 +1,15 @@
 package org.example.stonebridge.repository
 
 import io.kotest.matchers.shouldBe
-import org.example.stonebridge.Company
-import org.example.stonebridge.User
+import org.example.stonebridge.data.Company
+import org.example.stonebridge.data.User
 import org.example.stonebridge.data.UserType
-import org.example.stonebridge.data.changeEmail
 import org.junit.jupiter.api.Test
 
 class UserTest {
     @Test
     fun `メールアドレスを非従業員のものから従業員のものに変える`() {
-        val company = Company(domain = "mycorp.com", numberOfEmployees = 1)
+        val company = Company(id = 1, domain = "mycorp.com", numberOfEmployees = 1)
         val sut = User(id = 1, email = "user@gmail.com", type = UserType.Customer)
 
         val (newUser, newCompany) = sut.changeEmail("new@mycorp.com", company)
@@ -21,8 +20,8 @@ class UserTest {
     }
 
     @Test
-    fun `メールアドレスを従業員のものから非従業員に変える`(){
-        val company = Company(domain = "mycorp.com", numberOfEmployees = 1)
+    fun `メールアドレスを従業員のものから非従業員に変える`() {
+        val company = Company(id = 1, domain = "mycorp.com", numberOfEmployees = 1)
         val sut = User(id = 1, email = "user@mycorp.com", type = UserType.Employee)
 
         val (newUser, newCompany) = sut.changeEmail("new@gmail.com", company)
@@ -33,8 +32,8 @@ class UserTest {
     }
 
     @Test
-    fun `従業員の種類を変えずにメールアドレスを変える`(){
-        val company = Company(domain = "mycorp.com", numberOfEmployees = 1)
+    fun `従業員の種類を変えずにメールアドレスを変える`() {
+        val company = Company(id = 1, domain = "mycorp.com", numberOfEmployees = 1)
         val sut = User(id = 1, email = "user@mycorp.com", type = UserType.Employee)
 
         val (newUser, newCompany) = sut.changeEmail("new@mycorp.com", company)
@@ -45,8 +44,8 @@ class UserTest {
     }
 
     @Test
-    fun `メールアドレスを同じメールアドレスで変える`(){
-        val company = Company(domain = "mycorp.com", numberOfEmployees = 1)
+    fun `メールアドレスを同じメールアドレスで変える`() {
+        val company = Company(id = 1, domain = "mycorp.com", numberOfEmployees = 1)
         val sut = User(id = 1, email = "user@mycorp.com", type = UserType.Employee)
 
         val (newUser, newCompany) = sut.changeEmail("user@mycorp.com", company)

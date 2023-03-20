@@ -2,7 +2,6 @@ plugins {
     kotlin("jvm") version "1.8.10"
     kotlin("kapt") version "1.8.10"
     application
-    id("app.cash.sqldelight") version "2.0.0-alpha05"
 }
 
 group = "org.example"
@@ -15,11 +14,15 @@ repositories {
 dependencies {
     implementation("com.google.dagger:dagger:2.45")
     kapt("com.google.dagger:dagger-compiler:2.45")
-    implementation("app.cash.sqldelight:sqlite-driver:2.0.0-alpha05")
-    implementation("app.cash.sqldelight:coroutines-extensions:2.0.0-alpha05")
-    testImplementation("io.kotest:kotest-assertions:4.0.7")
-    testImplementation(kotlin("test"))
 
+    val exposedVersion = "0.41.1"
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("org.xerial:sqlite-jdbc:3.40.1.0")
+
+    testImplementation(kotlin("test"))
+    testImplementation("io.kotest:kotest-assertions:4.0.7")
     testImplementation(platform("org.junit:junit-bom:5.9.2"))
     testImplementation ("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
@@ -39,12 +42,4 @@ kotlin {
 
 application {
     mainClass.set("org.example.stonebridge.AppKt")
-}
-
-sqldelight {
-    databases {
-        create("Database") {
-            packageName.set("org.example.stonebridge")
-        }
-    }
 }
