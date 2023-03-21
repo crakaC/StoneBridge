@@ -1,13 +1,16 @@
-package org.example.stonebridge.data
+package org.example.stonebridge.model
 
-data class Company(
+class Company(
     val id: Long,
     val domain: String,
-    val numberOfEmployees: Long
+    numberOfEmployees: Long
 ) {
-    fun changeNumberOfEmployees(delta: Int): Company {
+    var numberOfEmployees = numberOfEmployees
+        private set
+
+    fun changeNumberOfEmployees(delta: Int) {
         assert(numberOfEmployees + delta >= 0)
-        return copy(numberOfEmployees = numberOfEmployees + delta)
+        numberOfEmployees += delta
     }
 
     fun isEmailCorporate(email: String): Boolean {

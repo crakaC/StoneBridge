@@ -1,7 +1,7 @@
 package org.example.stonebridge.mapper
 
 import org.example.stonebridge.UserRecord
-import org.example.stonebridge.data.User
+import org.example.stonebridge.model.User
 
 fun User.toRecord(): UserRecord {
     return UserRecord(

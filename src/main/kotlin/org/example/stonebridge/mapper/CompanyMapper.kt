@@ -1,7 +1,7 @@
 package org.example.stonebridge.mapper
 
 import org.example.stonebridge.CompanyRecord
-import org.example.stonebridge.data.Company
+import org.example.stonebridge.model.Company
 
 fun Company.toRecord(): CompanyRecord {
     return CompanyRecord(

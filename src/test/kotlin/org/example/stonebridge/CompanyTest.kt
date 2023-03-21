@@ -1,7 +1,7 @@
 package org.example.stonebridge
 
 import io.kotest.matchers.shouldBe
-import org.example.stonebridge.data.Company
+import org.example.stonebridge.model.Company
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource

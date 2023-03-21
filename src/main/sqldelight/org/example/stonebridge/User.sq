@@ -1,5 +1,5 @@
 import kotlin.Boolean;
-import org.example.stonebridge.data.UserType;
+import org.example.stonebridge.model.UserType;
 
 CREATE TABLE userRecord (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

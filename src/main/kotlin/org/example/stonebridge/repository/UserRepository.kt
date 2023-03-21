@@ -3,11 +3,11 @@ package org.example.stonebridge.repository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import org.example.stonebridge.UserQueries
-import org.example.stonebridge.data.User
 import org.example.stonebridge.db.Database
 import org.example.stonebridge.di.IODispatcher
 import org.example.stonebridge.mapper.toRecord
 import org.example.stonebridge.mapper.toUser
+import org.example.stonebridge.model.User
 import javax.inject.Inject
 import javax.inject.Singleton
 

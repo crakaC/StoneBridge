@@ -3,11 +3,11 @@ package org.example.stonebridge.repository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import org.example.stonebridge.CompanyQueries
-import org.example.stonebridge.data.Company
 import org.example.stonebridge.db.Database
 import org.example.stonebridge.di.IODispatcher
 import org.example.stonebridge.mapper.toCompany
 import org.example.stonebridge.mapper.toRecord
+import org.example.stonebridge.model.Company
 import javax.inject.Inject
 import javax.inject.Singleton
 

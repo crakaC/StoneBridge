@@ -17,9 +17,9 @@ class UserController @Inject constructor(
         }
         val company = companyRepository.get() ?: error("company not found")
 
-        val (newUser, newCompany) = user.changeEmail(newEmail, company)
-        userRepository.save(newUser)
-        companyRepository.save(newCompany)
+        user.changeEmail(newEmail, company)
+        userRepository.save(user)
+        companyRepository.save(company)
         for (event in user.emailChangeEvents) {
             messageBus.sendEmailChangedMessage(event.userId, event.newEmail)
         }

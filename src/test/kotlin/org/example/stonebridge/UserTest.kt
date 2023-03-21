@@ -1,9 +1,9 @@
 package org.example.stonebridge
 
 import io.kotest.matchers.shouldBe
-import org.example.stonebridge.data.Company
-import org.example.stonebridge.data.User
-import org.example.stonebridge.data.UserType
+import org.example.stonebridge.model.Company
+import org.example.stonebridge.model.User
+import org.example.stonebridge.model.UserType
 import org.example.stonebridge.event.EmailChangeEvent
 import org.junit.jupiter.api.Test
 
@@ -13,11 +13,11 @@ class UserTest {
         val company = Company(id = 1, domain = "mycorp.com", numberOfEmployees = 1)
         val sut = User(id = 1, email = "user@gmail.com", type = UserType.Customer)
 
-        val (newUser, newCompany) = sut.changeEmail("new@mycorp.com", company)
+        sut.changeEmail("new@mycorp.com", company)
 
-        newCompany.numberOfEmployees shouldBe 2
-        newUser.email shouldBe "new@mycorp.com"
-        newUser.type shouldBe UserType.Employee
+        company.numberOfEmployees shouldBe 2
+        sut.email shouldBe "new@mycorp.com"
+        sut.type shouldBe UserType.Employee
         sut.emailChangeEvents shouldBe listOf(EmailChangeEvent(1, "new@mycorp.com"))
     }
 
@@ -26,11 +26,11 @@ class UserTest {
         val company = Company(id = 1, domain = "mycorp.com", numberOfEmployees = 1)
         val sut = User(id = 1, email = "user@mycorp.com", type = UserType.Employee)
 
-        val (newUser, newCompany) = sut.changeEmail("new@gmail.com", company)
+        sut.changeEmail("new@gmail.com", company)
 
-        newCompany.numberOfEmployees shouldBe 0
-        newUser.email shouldBe "new@gmail.com"
-        newUser.type shouldBe UserType.Customer
+        company.numberOfEmployees shouldBe 0
+        sut.email shouldBe "new@gmail.com"
+        sut.type shouldBe UserType.Customer
         sut.emailChangeEvents shouldBe listOf(EmailChangeEvent(1, "new@gmail.com"))
     }
 
@@ -39,11 +39,11 @@ class UserTest {
         val company = Company(id = 1, domain = "mycorp.com", numberOfEmployees = 1)
         val sut = User(id = 1, email = "user@mycorp.com", type = UserType.Employee)
 
-        val (newUser, newCompany) = sut.changeEmail("new@mycorp.com", company)
+        sut.changeEmail("new@mycorp.com", company)
 
-        newCompany.numberOfEmployees shouldBe 1
-        newUser.email shouldBe "new@mycorp.com"
-        newUser.type shouldBe UserType.Employee
+        company.numberOfEmployees shouldBe 1
+        sut.email shouldBe "new@mycorp.com"
+        sut.type shouldBe UserType.Employee
         sut.emailChangeEvents shouldBe listOf(EmailChangeEvent(1, "new@mycorp.com"))
     }
 
@@ -52,10 +52,10 @@ class UserTest {
         val company = Company(id = 1, domain = "mycorp.com", numberOfEmployees = 1)
         val sut = User(id = 1, email = "user@mycorp.com", type = UserType.Employee)
 
-        val (newUser, newCompany) = sut.changeEmail("user@mycorp.com", company)
-        newCompany.numberOfEmployees shouldBe 1
-        newUser.email shouldBe "user@mycorp.com"
-        newUser.type shouldBe UserType.Employee
+        sut.changeEmail("user@mycorp.com", company)
+        company.numberOfEmployees shouldBe 1
+        sut.email shouldBe "user@mycorp.com"
+        sut.type shouldBe UserType.Employee
         sut.emailChangeEvents shouldBe emptyList()
     }
 }

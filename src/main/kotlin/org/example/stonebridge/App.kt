@@ -1,9 +1,9 @@
 package org.example.stonebridge
 
-import org.example.stonebridge.data.Company
-import org.example.stonebridge.data.User
-import org.example.stonebridge.data.UserType
 import org.example.stonebridge.di.DaggerAppComponent
+import org.example.stonebridge.model.Company
+import org.example.stonebridge.model.User
+import org.example.stonebridge.model.UserType
 
 suspend fun main() {
     val appComponent = DaggerAppComponent.create()

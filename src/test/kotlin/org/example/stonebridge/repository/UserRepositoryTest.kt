@@ -1,8 +1,8 @@
 package org.example.stonebridge.repository
 
 import kotlinx.coroutines.runBlocking
-import org.example.stonebridge.data.User
-import org.example.stonebridge.data.UserType
+import org.example.stonebridge.model.User
+import org.example.stonebridge.model.UserType
 import org.example.stonebridge.di.DaggerAppComponent
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
