@@ -1,5 +1,6 @@
 package org.example.stonebridge.repository
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import org.example.stonebridge.CompanyQueries
 import org.example.stonebridge.data.Company
@@ -9,12 +10,11 @@ import org.example.stonebridge.mapper.toCompany
 import org.example.stonebridge.mapper.toRecord
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.coroutines.CoroutineContext
 
 @Singleton
 class CompanyRepository @Inject constructor(
     private val database: Database,
-    @IODispatcher private val coroutineContext: CoroutineContext
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
     suspend fun get(): Company? {
         return companyQuery {
@@ -29,7 +29,7 @@ class CompanyRepository @Inject constructor(
     }
 
     private suspend fun <T> companyQuery(block: CompanyQueries.() -> T): T {
-        return withContext(coroutineContext) {
+        return withContext(ioDispatcher) {
             database.companyQueries.block()
         }
     }

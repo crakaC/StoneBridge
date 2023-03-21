@@ -2,27 +2,27 @@ package org.example.stonebridge.di
 
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
 import javax.inject.Singleton
-import kotlin.coroutines.CoroutineContext
 
 @Module
 object DispatcherModule {
     @Provides
     @IODispatcher
     @Singleton
-    fun provideIODispatcher(): CoroutineContext = Dispatchers.IO
+    fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides
     @MainDispatcher
     @Singleton
-    fun provideMainDispatcher(): CoroutineContext = Dispatchers.Main
+    fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 
     @Provides
     @ComputeDispatcher
     @Singleton
-    fun provideComputeDispatcher(): CoroutineContext = Dispatchers.Default
+    fun provideComputeDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
 }
 

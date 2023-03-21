@@ -1,5 +1,6 @@
 package org.example.stonebridge.repository
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import org.example.stonebridge.UserQueries
 import org.example.stonebridge.data.User
@@ -9,12 +10,11 @@ import org.example.stonebridge.mapper.toRecord
 import org.example.stonebridge.mapper.toUser
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.coroutines.CoroutineContext
 
 @Singleton
 class UserRepository @Inject constructor(
     private val database: Database,
-    @IODispatcher private val coroutineContext: CoroutineContext,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) {
     suspend fun findByUserId(id: Long): User? {
         return userQuery {
@@ -35,7 +35,7 @@ class UserRepository @Inject constructor(
     }
 
     private suspend fun <T> userQuery(block: UserQueries.() -> T): T {
-        return withContext(coroutineContext) {
+        return withContext(ioDispatcher) {
             database.userQueries.block()
         }
     }
