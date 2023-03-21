@@ -12,11 +12,16 @@ class UserController @Inject constructor(
 ) {
     suspend fun changeEmail(userId: Long, newEmail: String) {
         val user = userRepository.findByUserId(userId) ?: error("user not found")
+        if (!user.canChangeEmail()) {
+            throw IllegalStateException("user(id: $userId) can't change email")
+        }
         val company = companyRepository.get() ?: error("company not found")
 
         val (newUser, newCompany) = user.changeEmail(newEmail, company)
         userRepository.save(newUser)
         companyRepository.save(newCompany)
-        messageBus.sendEmailChangedMessage(userId, newEmail)
+        for (event in user.emailChangeEvents) {
+            messageBus.sendEmailChangedMessage(event.userId, event.newEmail)
+        }
     }
 }

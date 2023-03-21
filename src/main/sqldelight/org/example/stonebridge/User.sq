@@ -1,9 +1,11 @@
+import kotlin.Boolean;
 import org.example.stonebridge.data.UserType;
 
 CREATE TABLE userRecord (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT NOT NULL,
-    type TEXT AS UserType NOT NULL
+    type TEXT AS UserType NOT NULL,
+    emailConfirmed INTEGER AS Boolean NOT NULL DEFAULT FALSE
 );
 
 CREATE INDEX user_email ON userRecord(email);

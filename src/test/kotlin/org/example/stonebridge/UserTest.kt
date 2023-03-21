@@ -4,6 +4,7 @@ import io.kotest.matchers.shouldBe
 import org.example.stonebridge.data.Company
 import org.example.stonebridge.data.User
 import org.example.stonebridge.data.UserType
+import org.example.stonebridge.event.EmailChangeEvent
 import org.junit.jupiter.api.Test
 
 class UserTest {
@@ -17,6 +18,7 @@ class UserTest {
         newCompany.numberOfEmployees shouldBe 2
         newUser.email shouldBe "new@mycorp.com"
         newUser.type shouldBe UserType.Employee
+        sut.emailChangeEvents shouldBe listOf(EmailChangeEvent(1, "new@mycorp.com"))
     }
 
     @Test
@@ -29,6 +31,7 @@ class UserTest {
         newCompany.numberOfEmployees shouldBe 0
         newUser.email shouldBe "new@gmail.com"
         newUser.type shouldBe UserType.Customer
+        sut.emailChangeEvents shouldBe listOf(EmailChangeEvent(1, "new@gmail.com"))
     }
 
     @Test
@@ -41,10 +44,11 @@ class UserTest {
         newCompany.numberOfEmployees shouldBe 1
         newUser.email shouldBe "new@mycorp.com"
         newUser.type shouldBe UserType.Employee
+        sut.emailChangeEvents shouldBe listOf(EmailChangeEvent(1, "new@mycorp.com"))
     }
 
     @Test
-    fun `メールアドレスを同じメールアドレスで変える`() {
+    fun `メールアドレスを同じメールアドレスで変える。イベントは発生しない。`() {
         val company = Company(id = 1, domain = "mycorp.com", numberOfEmployees = 1)
         val sut = User(id = 1, email = "user@mycorp.com", type = UserType.Employee)
 
@@ -52,5 +56,6 @@ class UserTest {
         newCompany.numberOfEmployees shouldBe 1
         newUser.email shouldBe "user@mycorp.com"
         newUser.type shouldBe UserType.Employee
+        sut.emailChangeEvents shouldBe emptyList()
     }
 }
